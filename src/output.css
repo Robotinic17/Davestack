@@ -295,14 +295,8 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
-  .pt-\[20px\] {
-    padding-top: 20px;
-  }
   .pt-\[30px\] {
     padding-top: 30px;
-  }
-  .pt-\[40px\] {
-    padding-top: 40px;
   }
   .pt-\[70px\] {
     padding-top: 70px;
