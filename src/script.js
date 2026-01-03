@@ -552,4 +552,163 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// ===== REALISTIC LOADING SCREEN =====
+let progress = 0;
+const progressBar = document.getElementById("progressBar");
+const percentage = document.getElementById("percentage");
+const loader = document.getElementById("loader");
+
+// Track what's loaded
+const loadingStages = {
+  dom: false,
+  emailjs: false,
+  images: false,
+  fonts: false,
+  particles: false,
+};
+
+// Smooth progress animation
+function updateProgress(target) {
+  const interval = setInterval(() => {
+    if (progress < target) {
+      progress += Math.random() * 3; // Slower, more realistic
+      if (progress > target) progress = target;
+
+      progressBar.style.width = progress + "%";
+      percentage.textContent = Math.floor(progress) + "%";
+    } else {
+      clearInterval(interval);
+    }
+  }, 50);
+}
+
+// Stage 1: DOM Ready (20%)
+document.addEventListener("DOMContentLoaded", () => {
+  loadingStages.dom = true;
+  updateProgress(20);
+  console.log("✓ DOM loaded");
+});
+
+// Stage 2: EmailJS Ready (40%)
+function checkEmailJS() {
+  if (typeof emailjs !== "undefined") {
+    loadingStages.emailjs = true;
+    updateProgress(40);
+    console.log("✓ EmailJS loaded");
+  } else {
+    setTimeout(checkEmailJS, 100);
+  }
+}
+checkEmailJS();
+
+// Stage 3: Images Loaded (70%)
+function checkImages() {
+  const images = document.querySelectorAll("img");
+  let loadedCount = 0;
+
+  if (images.length === 0) {
+    loadingStages.images = true;
+    updateProgress(70);
+    console.log("✓ No images to load");
+    return;
+  }
+
+  images.forEach((img) => {
+    if (img.complete) {
+      loadedCount++;
+    } else {
+      img.addEventListener("load", () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+          loadingStages.images = true;
+          updateProgress(70);
+          console.log("✓ Images loaded");
+        }
+      });
+      img.addEventListener("error", () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+          loadingStages.images = true;
+          updateProgress(70);
+          console.log("⚠ Some images failed, continuing...");
+        }
+      });
+    }
+  });
+
+  if (loadedCount === images.length) {
+    loadingStages.images = true;
+    updateProgress(70);
+  }
+}
+
+// Stage 4: Fonts Loaded (85%)
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    loadingStages.fonts = true;
+    updateProgress(85);
+  });
+} else {
+  // Fallback if Font Loading API not supported
+  setTimeout(() => {
+    loadingStages.fonts = true;
+    updateProgress(85);
+  }, 1000);
+}
+
+// Stage 5: Particles Ready (95%)
+function checkParticles() {
+  if (typeof tsParticles !== "undefined") {
+    loadingStages.particles = true;
+    updateProgress(95);
+  } else {
+    setTimeout(checkParticles, 100);
+  }
+}
+checkParticles();
+
+// Final Stage: Everything Ready (100%)
+function checkAllLoaded() {
+  const allLoaded = Object.values(loadingStages).every(
+    (stage) => stage === true
+  );
+
+  if (allLoaded) {
+    updateProgress(100);
+
+    // Hide loader smoothly
+    setTimeout(() => {
+      loader.classList.add("hidden");
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 500);
+    }, 500);
+  } else {
+    setTimeout(checkAllLoaded, 100);
+  }
+}
+
+// Start checking images once DOM is ready
+window.addEventListener("DOMContentLoaded", () => {
+  checkImages();
+  checkAllLoaded();
+});
+
+// Fallback: Force complete after 10 seconds (safety net)
+setTimeout(() => {
+  if (progress < 100) {
+    console.log("⚠ Loading timeout - forcing completion");
+    progress = 100;
+    progressBar.style.width = "100%";
+    percentage.textContent = "100%";
+
+    setTimeout(() => {
+      loader.classList.add("hidden");
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 500);
+    }, 500);
+  }
+}, 3000);
+// ===== INITIALIZE AOS =====
 AOS.init();

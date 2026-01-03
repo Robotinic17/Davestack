@@ -2187,16 +2187,17 @@ body.dark .project-image {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(30deg, rgba(255, 255, 255, 0.75), transparent);
   display: flex;
   align-items: center;
+  backdrop-filter: blur(10px);
   justify-content: center;
   opacity: 0;
+  background: #ffffff3b;
   transition: all 0.3s ease;
 }
 
 body.dark .project-overlay {
-  background: linear-gradient(30deg, rgba(0, 0, 0, 0.75), transparent);
+  background: rgba(0, 0, 0, 0.119);
 }
 
 .project-card:hover .project-overlay {
@@ -3169,8 +3170,219 @@ body.dark .toast {
   font-weight: 500;
   font-family: var(--font-tertiary);
 }
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--light-bg, #c3d4ec);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+ .loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Dark Mode */
+body.dark .loader {
+  background: var(--dark-bg, #1e1e2f);
+}
+
+/* Logo Container */
+.loader-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 30px;
+  background: var(--light-bg, #c3d4ec);
+  box-shadow: 12px 12px 24px rgba(162, 176, 204, 0.6),
+    -12px -12px 24px rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  animation: pulse 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+body.dark .loader-logo {
+  background: var(--dark-bg, #1e1e2f);
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.5),
+    -12px -12px 24px rgba(50, 50, 70, 0.3);
+}
+
+/* Logo Image */
+.loader-logo img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 12px 12px 24px rgba(162, 176, 204, 0.6),
+      -12px -12px 24px rgba(255, 255, 255, 0.8);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 15px 15px 30px rgba(162, 176, 204, 0.7),
+      -15px -15px 30px rgba(255, 255, 255, 0.9),
+      inset 0 0 20px rgba(102, 126, 234, 0.1);
+  }
+}
+
+body.dark .loader-logo {
+  animation: pulseDark 2s ease-in-out infinite;
+}
+
+@keyframes pulseDark {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.5),
+      -12px -12px 24px rgba(50, 50, 70, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.6),
+      -15px -15px 30px rgba(50, 50, 70, 0.4),
+      inset 0 0 20px rgba(124, 58, 237, 0.2);
+  }
+}
+
+/* Brand Name */
+.loader-brand {
+  font-family: "Ubuntu", "Poppins", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+body.dark .loader-brand {
+  background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Progress Bar Container */
+.progress-container {
+  width: 350px;
+  height: 12px;
+  background: var(--light-bg, #c3d4ec);
+  border-radius: 20px;
+  box-shadow: inset 4px 4px 8px rgba(162, 176, 204, 0.6),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+body.dark .progress-container {
+  background: var(--dark-bg, #1e1e2f);
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.5),
+    inset -4px -4px 8px rgba(50, 50, 70, 0.3);
+}
+
+/* Progress Bar Fill */
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+body.dark .progress-bar {
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Shimmer Effect */
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+/* Loading Text */
+.loader-text {
+  font-family: "Quicksand", "Poppins", sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+body.dark .loader-text {
+  color: #a0a0b0;
+}
+
+/* Percentage */
+.loader-percentage {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 10px;
+}
+
+body.dark .loader-percentage {
+  background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+} 
+
 /* Responsive */
 @media (max-width: 768px) {
+
+
+  .progress-container {
+    width: 280px;
+  }
   .services-header h1 {
     font-size: 2.5rem;
   }
