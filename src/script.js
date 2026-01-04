@@ -710,5 +710,69 @@ setTimeout(() => {
     }, 500);
   }
 }, 3000);
+
+function animateCounter(element, target, duration = 2000) {
+  let current = 0;
+  const increment = target / (duration / 16); // 60fps
+  const hasPlus = element.textContent.includes("+");
+  const hasDivider = element.textContent.includes("/");
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.textContent = target + (hasPlus ? "+" : hasDivider ? "/7" : "");
+      clearInterval(timer);
+    } else {
+      element.textContent =
+        Math.floor(current) + (hasPlus ? "+" : hasDivider ? "/7" : "");
+    }
+  }, 16);
+}
+
+// Observe about cards and trigger counter animation
+const aboutCardsObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const numberElement = entry.target.querySelector(".card-number");
+        if (!numberElement) return;
+
+        const text = numberElement.textContent;
+        const hasPlus = text.includes("+");
+        const hasDivider = text.includes("/");
+
+        // Extract number (handles "5+", "30+", "24/7")
+        let number;
+        if (hasDivider) {
+          number = parseInt(text.split("/")[0]);
+        } else {
+          number = parseInt(text.replace("+", ""));
+        }
+
+        // Start from 0
+        numberElement.textContent =
+          "0" + (hasPlus ? "+" : hasDivider ? "/7" : "");
+
+        // Animate to target number
+        setTimeout(() => {
+          animateCounter(numberElement, number);
+        }, 200);
+
+        // Unobserve after animating
+        aboutCardsObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.5,
+    rootMargin: "0px",
+  }
+);
+
+// Observe all about cards
+document.querySelectorAll(".about_card").forEach((card) => {
+  aboutCardsObserver.observe(card);
+});
+
 // ===== INITIALIZE AOS =====
 AOS.init();
