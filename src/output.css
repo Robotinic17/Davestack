@@ -13,8 +13,6 @@
     --font-weight-semibold: 600;
     --font-weight-black: 900;
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --default-transition-duration: 150ms;
-    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -290,6 +288,9 @@
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
   }
   .gap-5 {
     gap: calc(var(--spacing) * 5);
@@ -2916,6 +2917,100 @@ body.dark .loader-percentage {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+@media (max-width: 1200px) {
+  .toggle-switch {
+    width: 95px;
+    height: 45px;
+  }
+  .sun {
+    width: 25px;
+    height: 25px;
+  }
+  .cloud2 {
+    width: 26px;
+    height: 9px;
+    bottom: 17px;
+    right: 26px;
+  }
+  .cloud1 {
+    width: 35px;
+    height: 12px;
+    top: 25px;
+    right: 5px;
+  }
+  .video {
+    width: 80px;
+    height: 80px;
+  }
+  .info h1 {
+    font-size: 4rem;
+  }
+  .info h3 {
+    font-size: 1.5rem;
+  }
+  .dynamic {
+    font-size: 18px;
+  }
+  .my_vibe {
+    font-size: 16px;
+  }
+  .cta-primary, .cta-secondary {
+    font-size: 14px;
+  }
+  .home_img {
+    width: 45%;
+  }
+  .AH1 {
+    font-size: 2.3rem;
+  }
+  .profile-desc h3 {
+    font-size: 25px;
+  }
+  .profile-about {
+    font-size: 10px;
+  }
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+  }
+  .profile-pic img {
+    width: 150px;
+    height: 150px;
+  }
+  .contact-text {
+    font-size: 13px;
+  }
+  .about_card {
+    gap: 15px;
+    padding: 25px 15px;
+  }
+  .card-icon {
+    width: 65px;
+    height: 65px;
+  }
+  .card-number {
+    font-size: 1.9rem;
+  }
+  .card-label {
+    font-size: 13px;
+  }
+  .skills_heading {
+    font-size: 2.5rem;
+  }
+  .skills_sub_heading {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  .skills > p {
+    font-size: 13px;
+  }
+  .skill-title {
+    font-size: 1.2rem;
+  }
+  .skill-name {
+    font-size: 13px;
+  }
 }
 @media (max-width: 768px) {
   .progress-container {
