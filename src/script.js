@@ -774,5 +774,51 @@ document.querySelectorAll(".about_card").forEach((card) => {
   aboutCardsObserver.observe(card);
 });
 
+// ========================================
+// MOBILE MENU TOGGLE
+// ========================================
+
+const menuToggle = document.getElementById("menuToggle");
+const sidebar = document.querySelector(".neu-sidebar");
+
+// Create overlay
+const overlay = document.createElement("div");
+overlay.className = "menu-overlay";
+document.body.appendChild(overlay);
+
+// Toggle menu
+menuToggle.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  sidebar.classList.toggle("active");
+  overlay.classList.toggle("active");
+
+  // Prevent body scroll when menu is open
+  if (sidebar.classList.contains("active")) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+});
+
+// Close menu when clicking overlay
+overlay.addEventListener("click", () => {
+  menuToggle.classList.remove("active");
+  sidebar.classList.remove("active");
+  overlay.classList.remove("active");
+  document.body.style.overflow = "";
+});
+
+// Close menu when clicking nav links
+document.querySelectorAll(".neu-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (window.innerWidth <= 768) {
+      menuToggle.classList.remove("active");
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+});
+
 // ===== INITIALIZE AOS =====
 AOS.init();
