@@ -3288,6 +3288,11 @@ body.dark .menu-toggle .line {
     right: 7px;
   }
 }
+@media (max-width: 500px) {
+  [data-aos] {
+    overflow-x: none;
+  }
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
