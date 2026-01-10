@@ -586,7 +586,6 @@ function updateProgress(target) {
 document.addEventListener("DOMContentLoaded", () => {
   loadingStages.dom = true;
   updateProgress(20);
-  console.log("✓ DOM loaded");
 });
 
 // Stage 2: EmailJS Ready (40%)
@@ -594,7 +593,6 @@ function checkEmailJS() {
   if (typeof emailjs !== "undefined") {
     loadingStages.emailjs = true;
     updateProgress(40);
-    console.log("✓ EmailJS loaded");
   } else {
     setTimeout(checkEmailJS, 100);
   }
@@ -609,7 +607,6 @@ function checkImages() {
   if (images.length === 0) {
     loadingStages.images = true;
     updateProgress(70);
-    console.log("✓ No images to load");
     return;
   }
 
@@ -622,7 +619,6 @@ function checkImages() {
         if (loadedCount === images.length) {
           loadingStages.images = true;
           updateProgress(70);
-          console.log("✓ Images loaded");
         }
       });
       img.addEventListener("error", () => {
@@ -630,7 +626,6 @@ function checkImages() {
         if (loadedCount === images.length) {
           loadingStages.images = true;
           updateProgress(70);
-          console.log("⚠ Some images failed, continuing...");
         }
       });
     }
