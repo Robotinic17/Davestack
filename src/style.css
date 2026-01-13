@@ -4189,4 +4189,34 @@ body.dark .menu-toggle .line {
   .contact-details {
     font-size: 10px;
   }
+
+  .toggle-switch {
+    width: 45px;
+    height: 45px;
+    top: 7px;
+  }
+  .menu-toggle {
+    top: 7px;
+    right: 60px;
+    width: 45px;
+    height: 45px;
+  }
+  .sun {
+    width: 27px;
+    height: 27px;
+    top: 9px;
+    left: 9px;
+  }
+  .cloud1 {
+    width: 5px;
+    height: 5px;
+    top: 32px;
+    right: 17px;
+  }
+  .cloud2 {
+    width: 6px;
+    height: 5px;
+    bottom: 13px;
+    right: 7px;
+  }
 }
