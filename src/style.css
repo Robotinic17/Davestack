@@ -3822,15 +3822,15 @@ body.dark .menu-toggle .line {
 }
 
 @media (max-width: 500px) {
-   [data-aos] {
+  [data-aos] {
     overflow-x: clip !important; /* Better than 'none' (which is invalid) */
   }
-  
+
   /* Prevent horizontal scroll on body */
   body {
     overflow-x: hidden;
   }
-  
+
   /* Disable AOS animations on mobile if needed */
   [data-aos] {
     transform: none !important;
@@ -3841,6 +3841,18 @@ body.dark .menu-toggle .line {
     gap: 40px;
     width: 100%;
     flex-direction: column;
+  }
+
+  .title {
+    align-self: center;
+    width: 95%;
+  }
+
+  .my_vibe {
+    font-size: 14px;
+    align-self: center;
+    width: 95%;
+    text-align: left;
   }
 
   .info {
@@ -4101,5 +4113,80 @@ body.dark .menu-toggle .line {
   }
   .contact-grid {
     gap: 4rem;
+  }
+}
+
+@media (max-width: 400px) {
+  #about
+    > div.about_head.flex.w-\[100\%\].justify-left.items-center.gap-5
+    > span {
+    width: 55%;
+  }
+  .loader-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .loader-logo img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .loader-brand {
+    font-size: 2rem;
+  }
+
+  .progress-container {
+    width: 250px;
+    height: 10px;
+  }
+
+  .loader-text {
+    font-size: 0.8rem;
+  }
+
+  .loader-percentage {
+    font-size: 1rem;
+  }
+  .about_head {
+    justify-content: space-between;
+    gap: 0px;
+  }
+  .about_cards {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 30px;
+    width: 90%;
+    align-self: center;
+  }
+  .timeline-card {
+    padding: 13px;
+    border-radius: 15px;
+  }
+  .timeline-date {
+    padding: 6px 10px;
+    border-radius: 13px;
+    font-size: 6px;
+  }
+  .timeline-title {
+    font-size: 13px;
+  }
+  .timeline-company {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+  .timeline-description {
+    font-size: 9px;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 12px;
+  }
+  .skill-tag {
+    padding: 4px 9px;
+    font-size: 7px;
+    border-radius: 15px;
+  }
+  .contact-details {
+    font-size: 10px;
   }
 }
